@@ -1,4 +1,8 @@
 ---
-title: Welcome to my blog
+title: Hello world
 ---
+
+
+This is a test
+
 
