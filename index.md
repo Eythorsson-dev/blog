@@ -1,8 +1,3 @@
 ---
-title: Hello world
+title: Steinar Eythorsson
 ---
-
-
-This is a test
-
-
