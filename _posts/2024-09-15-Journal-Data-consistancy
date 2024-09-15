@@ -24,22 +24,24 @@ struct Context{
   uow: UnitOfWork
 }
 
-fn create_block_command(ctx: Context, note_id: NoteId, id: BlockId, parent_id: Option<BlockId>, previous_id: Option<BlockId>, r#type: BlockTypeDto) -> Result<(), String> {
-  let r#type: BlockType = match type {
-    BlockTypeDto::Text { id, text } -> {
-      let text = Text::new(id, text);
-      ctx.uow.text.save(text).await?;
-      BlockType::Text(text_id)
-    }
-  }
-
-  let note = ctx.uow.Note.get_by_id(note_id).await?;
-
-  note.create_block(id, parent_id, previous_id, r#type);
+async fn create_block_command(ctx: Context, note_id: NoteId, id: BlockId, parent_id: Option<BlockId>, previous_id: Option<BlockId>, r#type: BlockTypeDto) -> Result<(), Error> {
+    let r#type: BlockType = match r#type {
+      BlockTypeDto::Text { id, text } => {
+        let text = Text::new(id, text);
+        ctx.uow.text.save(text).await?;
+        BlockType::Text(text_id)
+      }
+    };k
   
-  ctc.uow.note.save(note).await?;
+    let note = ctx.uow.text.get_by_id(note_id).await?;
   
-  ctx.uow.commit();
+    note.create_block(id, parent_id, previous_id, r#type);
+    
+    ctx.uow.note.save(note).await?;
+    
+    ctx.uow.commit();
+
+    Ok(())
 }
 ```
 
