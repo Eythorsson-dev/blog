@@ -1,5 +1,5 @@
 ---
-title: WIP - Rust unit of work implementation
+title: Rust unit of work implementation
 date: 2024-09-18
 ---
 
@@ -132,7 +132,7 @@ pub trait Repository<Entity: Aggregate> {
 
 Once that is in place, it's time to create our aggregate:
 
-```
+```rust
 // I dont like poluting our structs like this. Idealy, the domain should not know
 // that we are using sqlx...
 #[derive(Serialize, Clone, Copy, sqlx::Type, PartialEq, Eq, Debug)]
